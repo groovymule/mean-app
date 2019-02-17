@@ -22,6 +22,7 @@ app.use('/api', routes);
 
 
 const server = app.listen(app.get('port'), function() {
-  const port = server.address().port;
+  // const port = server.address().port;
+  const port = process.env.PORT || 3000
   console.log('Magic happens on port ' + port);
 });
