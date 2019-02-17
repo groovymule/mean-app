@@ -1,35 +1,25 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const routes = require('./routes');
+
 
 app.set('port', 3000);
 
-//Standard route to homepage.
 
-app.get('/', function(req, res) {
-  console.log("Get the hooooooooomepage!")
-  res
-    .status(200)
-    .sendFile(path.join(__dirname, 'public', 'index.html'));
+//Express Middleware has to be in the correct running order!!!
+app.use(function(req, res, next) {
+  console.log(req.method, req.url);
+  next();
+
 });
+//Express Middleware to deliver static files
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api', routes);
 
-//Delivers json to the browser.
 
-app.get('/json', function(req, res) {
-  console.log("Get the json")
-  res
-    .status(200)
-    .json({ "jsonData": true });
-});
 
-//Delivers a static file to the browser.
 
-app.get('/file', function(req, res) {
-  console.log("Get the file")
-  res
-    .status(200)
-    .sendFile(path.join(__dirname, 'app.js'));
-});
 
 const server = app.listen(app.get('port'), function() {
   const port = server.address().port;
