@@ -4,8 +4,8 @@ const path = require('path');
 const routes = require('./routes');
 
 
-app.set('port', 3000);
-
+// app.set('port', 3000);
+const port = process.env.PORT || 3000
 
 //Express Middleware has to be in the correct running order!!!
 app.use(function(req, res, next) {
@@ -22,7 +22,7 @@ app.use('/api', routes);
 
 
 const server = app.listen(app.get('port'), function() {
-  // const port = server.address().port;
-  const port = process.env.PORT || 3000
+  const port = server.address().port;
+
   console.log('Magic happens on port ' + port);
 });
