@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const routes = require('./routes');
+const routes = require('./api/routes');
 
 
-// app.set('port', 3000);
-const port = process.env.PORT || 3000
+app.set('port', 3000);
+
 
 //Express Middleware has to be in the correct running order!!!
 app.use(function(req, res, next) {
