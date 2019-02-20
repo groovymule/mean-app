@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const routes = require('./api/routes');
+const bodyParser = require('body-parser');
 
 
 app.set('port', 3000);
@@ -15,6 +16,9 @@ app.use(function(req, res, next) {
 });
 //Express Middleware to deliver static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use('/api', routes);
 
 
